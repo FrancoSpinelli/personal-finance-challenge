@@ -32,9 +32,9 @@ app.use(express.static(publicPath));
 
 // Rutas hacia los módulos 
 
-let mainRoute = require ('./src/routes/main.js');
+let apiRoute = require ('./src/routes/api.js');
 
 // Respuestas con los prefijos '/...'
 
-app.use('/', mainRoute);
+app.use('/api/', apiRoute);
 

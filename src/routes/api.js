@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
-let mainController = require ('../controllers/mainController');
+let apiController = require ('../controllers/apiController');
 
-router.get('/', mainController.index);
+router.get('/', apiController.index);
 
 
 module.exports = router;
