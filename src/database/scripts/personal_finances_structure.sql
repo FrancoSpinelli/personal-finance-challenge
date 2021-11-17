@@ -40,9 +40,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `personal_finances`.`movement`
+-- Table `personal_finances`.`movements`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `personal_finances`.`movement` (
+CREATE TABLE IF NOT EXISTS `personal_finances`.`movements` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NULL,
@@ -50,7 +50,6 @@ CREATE TABLE IF NOT EXISTS `personal_finances`.`movement` (
   `category_id` INT NOT NULL DEFAULT 1,
   `type` VARCHAR(255) NOT NULL,
   `date` DATE NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
   `amount` DECIMAL(2) UNSIGNED NOT NULL,
   `concept` TEXT NOT NULL,
   PRIMARY KEY (`id`),
