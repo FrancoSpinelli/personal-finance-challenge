@@ -16,6 +16,12 @@ app.use(express.json());
 app.use(methodOverride('_method'));
 
 
+// LISTEN PORT 3003
+app.listen(process.env.PORT || 3003, function(){
+    console.log('Server running on port 3003');
+});
+
+
 
 // Configuración ruta absoluta a la carpeta PUBLIC
 
@@ -26,9 +32,9 @@ app.use(express.static(publicPath));
 
 // Rutas hacia los módulos 
 
-let rutasMain = require ('./src/routes/main.js');
+let mainRoute = require ('./src/routes/main.js');
 
 // Respuestas con los prefijos '/...'
 
-app.use('/', rutasMain);
+app.use('/', mainRoute);
 
