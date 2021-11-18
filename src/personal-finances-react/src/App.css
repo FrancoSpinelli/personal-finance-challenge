@@ -16,6 +16,58 @@
   border-radius: 0.8em 0.8em 0 0;
 }
 
+/* MOVEMENT */
+.movement {
+  font-size: 0.8rem;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.movement div{
+  display: flex;
+  width: 70%;
+  align-items: center;
+}
+
+.movement div img {
+  width: 3rem;
+  border-radius: 0.2rem;
+  margin: 0.7rem;
+}
+
+.movement div .detail{
+  flex-direction: column;
+  justify-content: left;
+  margin-left: 0;
+}
+
+.movement div .detail p{
+  align-self: flex-start;
+}
+
+.movement i{
+  position: absolute;
+  right: 0.8rem;
+
+}
+
+.movement #concept{
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.movement #amount{
+  font-weight: bold;
+  margin-right: 2rem;
+  text-align: right;
+}
+
+
+
 /* BALANCE */
 
 .balance{
@@ -81,31 +133,57 @@
 
 .new-movement .input{
   width: 85%;
-  margin: auto;
+  margin: 1em auto;
 }
 
 .new-movement .input div{
   width: 100%;
-  margin: 1em auto;
+  margin: auto;
   display: flex;  
-  justify-content: space-between;
-  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
+
 
 .new-movement .input div input{
-  width: 7rem;
-  height: 3em;
+  width: 12rem;
+  height: 3.2em;
+  margin: 1em 0;
+  text-align: center;
 }
 
-.new-movement .input div #amount{
-  width: 4rem;
-  margin-right: 3rem;
+
+.new-movement .input div span{
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+
+.new-movement .input div #amount-input{
+  width: 12em;
+  margin-right: 2.5em;
 }
 
 .new-movement .input div i{   
-    position: absolute;
-    right: 0.2em;
+  font-size: 1.4em;
+  position: absolute;
+  right: 0;
+  /* bottom: 0.75em; */
+  }
+
+  .new-movement .input #save {   
+    font-size: 1.4rem;
+    margin: 0.8em 0;
   }
 
 
+/* LAST MOVEMENTS */
+
+.last-movements{
+  width: 80%;
+  margin: auto;
+}
 

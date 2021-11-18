@@ -1,6 +1,7 @@
 import React from 'react';
 import Balance from '../components/Balance';
 import ButtonType from '../components/Buttons/Type';
+import Lastmovements from './LastMovements';
 import NewMovement from './NewMovement';
 
 const Home = () => {
@@ -11,7 +12,8 @@ const Home = () => {
                 <ButtonType name="Receipts"/>
                 <ButtonType name="Expenses"/>
             </div>
-            <NewMovement movement="MOVIMIENTO"/>
+            <NewMovement movement="Receipt"/>
+            <Lastmovements/>
         </section>
     );
 }

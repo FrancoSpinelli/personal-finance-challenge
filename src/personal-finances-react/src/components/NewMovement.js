@@ -8,15 +8,19 @@ const NewMovement = (props) => {
             <Title name={`New ${props.movement}`}/>
             <section className="input">
                 <div>
-                    <input type="date"/>
-                    <input id="amount" type="text"/>
-                    <i class="fas fa-receipt"></i>
+                    <input type="date" defaultValue={Date.now()}/>
+                    <span>
+                        <input id="amount-input" type="text" placeholder="amount" />
+                        <i class="fas fa-receipt"></i>
+                    </span>
                 </div>
                 <div>
-                    <input type="text"/>
-                    <input type="text"/>
+                    <input type="text" placeholder="concept"/>
+                    <input type="text" placeholder="category"/>
                 </div>
-                <ButtonType name="Save"/>
+                <div id="save">
+                    <ButtonType name="Save"/>
+                </div>
             </section>
         </div>
     );
