@@ -1,38 +1,111 @@
-.App {
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.home{
+  background-color: #f2f2f2;
+}
+
+.title{
   text-align: center;
+  font-size: 1.2rem;
+  padding: 0.7em;
+  background-color: #9869d174;
+  border-radius: 0.8em 0.8em 0 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* BALANCE */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.balance{
+  width: 80%;
+  margin: 2rem auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: left;
+  font-size: 1rem;
+  border: 1px solid #000000;
+  border-radius: 0.8rem;
+  
 }
 
-.App-link {
-  color: #61dafb;
+
+.balance img {
+  margin: 0.5em;
+  padding: 0.7em;
+  width: 30%;
+  border-radius: 50%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.balance p {
+  font-size: 1rem;
 }
+
+
+/* BUTTONS TYPE */
+
+.type-button{
+  min-width: 7rem ;
+  font-size: 0.9rem;
+  padding: 0.8rem;
+  border-radius: 0.8rem;
+  color: #ffffff;
+  background-color: black;
+}
+
+.type-button.receipts{
+  background-color: #0d9d0de0;
+}
+
+.type-button.expenses{
+  background-color: #c72a2ade;
+}
+
+.buttons-type{
+  display: flex;
+  width: 80%;
+  margin: auto;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+
+/* NEW MOVEMENT */
+
+.new-movement{
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.new-movement .input{
+  width: 85%;
+  margin: auto;
+}
+
+.new-movement .input div{
+  width: 100%;
+  margin: 1em auto;
+  display: flex;  
+  justify-content: space-between;
+  position: relative;
+}
+
+.new-movement .input div input{
+  width: 7rem;
+  height: 3em;
+}
+
+.new-movement .input div #amount{
+  width: 4rem;
+  margin-right: 3rem;
+}
+
+.new-movement .input div i{   
+    position: absolute;
+    right: 0.2em;
+  }
+
+
+
