@@ -19,7 +19,7 @@ USE `personal_finances` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `personal_finances`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL,
+  `first_name` VARCHAR(255) NOT NULL,
   `last_name` VARCHAR(255) NOT NULL,
   `mail` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
@@ -32,7 +32,7 @@ ENGINE = InnoDB;
 -- Table `personal_finances`.`categories`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `personal_finances`.`categories` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `image` TEXT NOT NULL,
   PRIMARY KEY (`id`))
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `personal_finances`.`movements` (
   `category_id` INT NOT NULL DEFAULT 1,
   `type` VARCHAR(255) NOT NULL,
   `date` DATE NOT NULL,
-  `amount` DECIMAL(2) UNSIGNED NOT NULL,
+  `amount` DECIMAL(5,2) UNSIGNED NOT NULL,
   `concept` TEXT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `categoriy_id_idx` (`category_id` ASC),
