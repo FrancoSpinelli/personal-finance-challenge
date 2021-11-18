@@ -34,6 +34,14 @@ module.exports = (sequelize,dataTypes) => {
             type: dataTypes.STRING,
             allowNull: false,
         },
+        createdAt: {
+            field: 'created_at',
+            type: dataTypes.DATE,
+        },
+        updatedAt: {
+            field: 'update_at',
+            type: dataTypes.DATE,
+        },
     };
 
     let config = {

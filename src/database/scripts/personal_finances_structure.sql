@@ -44,8 +44,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `personal_finances`.`movements` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` TIMESTAMP NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_at` TIMESTAMP NULL,
   `user_id` INT NOT NULL,
   `category_id` INT NOT NULL DEFAULT 1,
   `type` VARCHAR(255) NOT NULL,

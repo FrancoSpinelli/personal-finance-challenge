@@ -4,7 +4,19 @@ const path = require('path');
 
 let apiController = require ('../controllers/apiController');
 
-router.get('/', apiController.index);
 
+//USERS
+router.get('/users', apiController.users);
+router.get('/users/:id', apiController.userByPk);
+
+
+
+//MOVEMENTS 
+router.get('/movements/:id', apiController.movementsByUser);
+
+
+
+//MOVEMENTS 
+router.get('/categories', apiController.categories);
 
 module.exports = router;
