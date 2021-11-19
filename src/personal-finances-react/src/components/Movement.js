@@ -13,7 +13,7 @@ const Movement = () => {
                 </div>
             </div>
             <p id="amount"> $$$$$$</p> 
-            <i class="fas fa-ellipsis-v"></i>
+            <i className="fas fa-ellipsis-v"></i>
         </div>
     );
 }

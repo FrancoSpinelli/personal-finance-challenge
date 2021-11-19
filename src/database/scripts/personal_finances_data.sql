@@ -1,4 +1,4 @@
-insert into users (first_name, last_name, mail, password) values ('Mattie', 'Lynde', 'mlynde0@goo.gl', 'TLDw2mUXI');
+insert into users (first_name, last_name, mail, password) values ('Franco', 'Spinelli', 'franco_spinelli@hotmail.com', '1234');
 insert into users (first_name, last_name, mail, password) values ('Joly', 'Brockhouse', 'jbrockhouse1@meetup.com', 'vLajSLiUd');
 insert into users (first_name, last_name, mail, password) values ('Jada', 'Crutchfield', 'jcrutchfield2@webnode.com', 'gNoY7lF');
 insert into users (first_name, last_name, mail, password) values ('Mervin', 'Lammertz', 'mlammertz3@tmall.com', 'bX17rlfso');
@@ -101,12 +101,26 @@ insert into movements (user_id, category_id, type, date, amount, concept) values
 insert into movements (user_id, category_id, type, date, amount, concept) values (1, 5, 'expenses', '2021-02-08 16:16:03', 91.08, 'Thoughtstorm');
 insert into movements (user_id, category_id, type, date, amount, concept) values (46, 1, 'receipts', '2021-08-03 13:59:00', 37.18, 'Eire');
 
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 3, 'receipts', '2021-10-23 10:50:36', 14.47, 'Skynoodle');
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 3, 'receipts', '2020-11-19 23:49:27', 33.67, 'Livefish');
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 4, 'receipts', '2021-07-13 15:18:32', 115.46, 'Devpoint');
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 3, 'receipts', '2021-01-28 02:08:11', 77.36, 'Thoughtblab');
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 1, 'receipts', '2020-11-28 17:08:03', 92.69, 'Roomm');
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 5, 'expenses', '2021-05-06 05:55:53', 71.21, 'Yotz');
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 3, 'expenses', '2021-08-31 00:04:31', 67.3, 'Kare');
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 4, 'receipts', '2021-01-02 04:24:06', 105.06, 'Kwideo');
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 5, 'receipts', '2021-11-05 13:32:07', 105.81, 'Yadel');
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 2, 'receipts', '2021-04-20 18:23:07', 21.63, 'Aivee');
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 1, 'receipts', '2021-07-03 14:16:19', 50.34, 'Browsetype');
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 5, 'receipts', '2021-04-25 02:06:54', 90.59, 'Quaxo');
+insert into movements (user_id, category_id, type, date, amount, concept) values (1, 4, 'expenses', '2021-03-15 15:37:51', 11.35, 'Omba');
 
-INSERT INTO `personal_finances`.`categories` (`name`, `image`) VALUES ('food', 'icon-food.png');
+
+INSERT INTO `personal_finances`.`categories` (`name`, `image`) VALUES ('others', 'icon-dollar.png');
 INSERT INTO `personal_finances`.`categories` (`name`, `image`) VALUES ('hotel', 'icon-hotel.png');
 INSERT INTO `personal_finances`.`categories` (`name`, `image`) VALUES ('airplane', 'icon-airplane.png');
 INSERT INTO `personal_finances`.`categories` (`name`, `image`) VALUES ('bus', 'icon-bus.png');
 INSERT INTO `personal_finances`.`categories` (`name`, `image`) VALUES ('supermarket', 'icon-supermarket.png');
-INSERT INTO `personal_finances`.`categories` (`name`, `image`) VALUES ('dollar', 'icon-dollar.png');
+INSERT INTO `personal_finances`.`categories` (`name`, `image`) VALUES ('food', 'icon-food.png');
 INSERT INTO `personal_finances`.`categories` (`name`, `image`) VALUES ('toll', 'icon-toll.png');
 INSERT INTO `personal_finances`.`categories` (`name`, `image`) VALUES ('party', 'icon-party.png');

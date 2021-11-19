@@ -1,5 +1,5 @@
 import React from 'react';
-import DefaultImg from '../assets/img/users/default.jpg'
+import DefaultImg from '../assets/img/users/franco.jpg'
 
 const Balance = () => {
     return (

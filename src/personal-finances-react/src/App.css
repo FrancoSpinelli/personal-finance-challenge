@@ -8,12 +8,33 @@
   background-color: #f2f2f2;
 }
 
+
+/* TITLE */
+
 .title{
   text-align: center;
   font-size: 1.2rem;
   padding: 0.7em;
   background-color: #9869d174;
   border-radius: 0.8em 0.8em 0 0;
+  position: relative;
+}
+
+.title .exit{
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  padding: 0;
+  background-color: initial;
+  border-radius: 50%;
+  border: none;
+  margin: 0;
+  color: #000000;
+}
+
+.title .exit i{
+  background-color: none;
 }
 
 /* MOVEMENT */
@@ -25,6 +46,9 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  border-radius: 0.8em 0.8em 0 0;
+  background-color: #ffecec;
+
 }
 
 .movement div{
@@ -79,7 +103,7 @@
   font-size: 1rem;
   border: 1px solid #000000;
   border-radius: 0.8rem;
-  
+  background-color: #ffecec;  
 }
 
 
@@ -128,12 +152,15 @@
 
 .new-movement{
   width: 80%;
-  margin: 2rem auto;
+  margin: 2em auto;
+  background-color: #ffecec;
 }
 
+
 .new-movement .input{
-  width: 85%;
-  margin: 1em auto;
+  width: 90%;
+  margin: auto;
+  padding: 0.5em 0;
 }
 
 .new-movement .input div{
@@ -147,13 +174,20 @@
 }
 
 
-.new-movement .input div input{
+.new-movement .input div input, select{
   width: 12rem;
-  height: 3.2em;
+  height: 2rem;
   margin: 1em 0;
   text-align: center;
+  border-radius: 0.4rem;
+  background-color: #ffffff;
+  border: #767676 solid 1px;
+  color: #000000;
 }
 
+.new-movement .input div select option{
+  text-align: center;
+}
 
 .new-movement .input div span{
   display: flex;
@@ -163,8 +197,9 @@
 
 
 .new-movement .input div #amount-input{
-  width: 12em;
-  margin-right: 2.5em;
+  width: 10rem;
+  margin-right: 2rem;
+  align-self: flex-start;
 }
 
 .new-movement .input div i{   
@@ -184,6 +219,6 @@
 
 .last-movements{
   width: 80%;
-  margin: auto;
+  margin: 1rem auto;
 }
 
