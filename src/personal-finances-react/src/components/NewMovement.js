@@ -3,7 +3,7 @@ import Title from '../components/Title';
 import ButtonType from '../components/Buttons/Type';
 
 const NewMovement = (props) => {
-
+    
     function ajax(url, method, setState) {
         const http = new XMLHttpRequest();
         http.open(method, url);
@@ -19,18 +19,17 @@ const NewMovement = (props) => {
     const [categories, setCategories] = useState([]);
 
     function onFocusFunction() {
-        ajax('http://192.168.55.107:3003/api/categories', 'get', setCategories);
+        ajax('http://192.168.4.152:3003/api/categories', 'get', setCategories);
     }
 
 
-    
     return (
-
         <div className="new-movement" onFocus={onFocusFunction}>
+            <button onClick={props.exit} className="exit"><i className="far fa-times-circle"></i></button>
             <Title exit={props.exit} name={`New ${props.movement}`}/>
             <section className="input">
                 <div>
-                    <input type="date" defaultValue={new Date(Date.now())}/>
+                    <input type="date" />
                     <span>
                         <input id="amount-input" type="text" placeholder="amount (us$)" autoFocus autoComplete="off" />
                         <i className="fas fa-receipt"></i>
@@ -45,7 +44,7 @@ const NewMovement = (props) => {
                     </select>
                 </div>
                 <div id="save">
-                    <ButtonType name="Receipts"/>
+                    <span><ButtonType type={props.movement} name="Save"/></span>
                 </div>
             </section>
         </div>

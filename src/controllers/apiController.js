@@ -27,14 +27,24 @@ let mainController = {
     },
     //MOVEMENTS
     movementsByUser: async(req, res) => {
+        let categories = await db.Categories.findAll();
         let movements = await db.Movements.findAll({
-            where: {user_id: req.params.id }
+            where: {user_id: req.params.id },
+            order: [['date', 'desc']]
         });
+
         return res.status(200).json({
             status: 200,
             length: movements.length,
-            data: movements,
+            data: movements.map(movement => { 
+                return {
+                    ...movement.dataValues,
+                    category: categories.filter(category => category.id === movement.category_id)[0],
+                    
+                }
+            }) 
         });
+        
     },
     //CATEGORIES
     categories: async(req,res) => {

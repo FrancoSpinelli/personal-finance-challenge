@@ -1,6 +1,7 @@
 import React, {useState}from 'react';
 import Balance from '../components/Balance';
 import ButtonType from '../components/Buttons/Type';
+import Header from './Header';
 import Lastmovements from './LastMovements';
 import NewMovement from './NewMovement';
 
@@ -20,6 +21,7 @@ const Home = () => {
     
     return (
         <section className="home">
+            <Header/>
             <Balance/>
             <div className="buttons-type">
                 <span onClick={onClickReceiptsFunction}><ButtonType name="Receipt"/></span>
