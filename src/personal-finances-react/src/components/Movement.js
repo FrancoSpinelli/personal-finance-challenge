@@ -18,7 +18,12 @@ const Movement = (props) => {
                     <p>{props.category.name}</p>
                 </div>
             </div>
-            <p id="amount">{`${props.amount} us$`}</p> 
+            {props.type === "receipt" &&
+                <p id="amount" className="green">{`${props.amount} US$`}</p> 
+            }
+            {props.type === "expense" &&
+                <p id="amount" className="red">{`- ${props.amount} US$`}</p> 
+            }
             <i className="fas fa-ellipsis-v"></i>
         </div>
     );

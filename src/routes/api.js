@@ -12,6 +12,8 @@ router.get('/users/:id', apiController.userByPk);
 
 //MOVEMENTS 
 router.get('/movements/:id', apiController.movementsByUser);
+router.get('/movements/balance/:id', apiController.balanceByUser);
+router.post('/movements/add', apiController.add);
 
 
 

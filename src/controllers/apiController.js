@@ -30,7 +30,7 @@ let mainController = {
         let categories = await db.Categories.findAll();
         let movements = await db.Movements.findAll({
             where: {user_id: req.params.id },
-            order: [['date', 'desc']]
+            order: [['date', 'desc'], ['id', 'desc']]
         });
 
         return res.status(200).json({
@@ -45,6 +45,51 @@ let mainController = {
             }) 
         });
         
+    },
+    balanceByUser: async(req, res) => {
+        try{
+            let movements = await db.Movements.findAll();
+            let positiveBalance = movements.map(movement => {
+                if(movement.type === 'receipt'){
+                    return Number(movement.amount)
+                } else {
+                    return 0
+                }
+            }) 
+            positiveBalance = positiveBalance.reduce((acum, acumAct) => {
+                return acum + acumAct;
+            })
+            let negativeBalance = movements.map(movement => {
+                if(movement.type === 'expense'){
+                    return Number(movement.amount)
+                } else {
+                    return 0
+                }
+            }) 
+            negativeBalance = negativeBalance.reduce((acum, acumAct) => {
+                return acum + acumAct;
+            })
+            
+            return res.status(200).json({
+                status: 200,
+                data: {
+                    positive_balance: Math.round(positiveBalance),
+                    negative_balance: Math.round(negativeBalance),
+                    balance: Math.round(positiveBalance - negativeBalance)
+                }
+            })
+        }catch(err){
+            console.error(err);
+        }
+    },
+    add: async(req, res) => {
+        try{
+            console.log(req.body);
+            let body = req.body;
+            await db.Movements.create({...body})
+        }catch (err){
+            console.error(err);
+        }
     },
     //CATEGORIES
     categories: async(req,res) => {
