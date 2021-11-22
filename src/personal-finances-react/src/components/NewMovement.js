@@ -48,25 +48,27 @@ const NewMovement = (props) => {
             user_id: 1,
             type: props.movement,
         }
-        return JSON.stringify(body)
+        return JSON.stringify(body);
     }
     
     function saveFunction(){
-        let bodyJSON = bodyToJSON()
+        let bodyJSON = bodyToJSON();
         ajax('http://192.168.0.15:3003/api/movements/add', 'post', "", bodyJSON );
-        return props.exit()
+        return props.exit();
     }
 
     function editFunction() {
-        let bodyJSON = bodyToJSON()
+        let bodyJSON = bodyToJSON();
         ajax(`http://192.168.0.15:3003/api/movements/edit/${props.propsData.id}`, 'post', "", bodyJSON );
-        return props.exit()
+        return window.location.reload();
+        // return props.exit()
     }
 
     function deleteFunction() {
         let bodyJSON = bodyToJSON()
         ajax(`http://192.168.0.15:3003/api/movements/delete/${props.propsData.id}`, 'post', "", bodyJSON );
-        return props.exit()
+        return window.location.reload();
+        // return props.exit()
     }
 
     let dateNow = new Date(Date.now());

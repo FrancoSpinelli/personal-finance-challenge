@@ -23,7 +23,6 @@ const Movement = (props) => {
         setOptions(false)
     }
 
-    console.log(props);
     return (
         <React.Fragment>
             

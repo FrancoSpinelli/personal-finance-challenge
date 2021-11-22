@@ -3,6 +3,7 @@ import Balance from '../components/Balance';
 import ButtonType from '../components/Buttons/Type';
 import Header from './Header';
 import Lastmovements from './LastMovements';
+import Login from './Login';
 import NewMovement from './NewMovement';
 
 const Home = () => {
@@ -50,7 +51,11 @@ const Home = () => {
     }
     
     return (
-        <section className="home">
+        <React.Fragment>
+            <section className="sesison">
+                <Login/>
+            </section>
+            <section className="home">
             <Header/>
             { balance.data && 
                 <Balance balance={balance.data.balance}/>
@@ -68,6 +73,7 @@ const Home = () => {
                 <Lastmovements movements={movements}/>
             }
         </section>
+        </React.Fragment>
     );
 }
 
