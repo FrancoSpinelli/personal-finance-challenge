@@ -73,7 +73,11 @@ button:hover{
 .movement i{
   position: absolute;
   right: 0.8rem;
+}
 
+.movement i:hover{
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 .movement #concept{
@@ -85,7 +89,7 @@ button:hover{
   font-weight: bold;
   margin-right: 2rem;
   text-align: right;
-  width: 23%;
+  width: 25%;
 }
 
 .movement #amount.red{
@@ -95,6 +99,7 @@ button:hover{
 .movement #amount.green{
   color: #0d9d0de0;
 }
+
 
 
 
@@ -194,6 +199,7 @@ button:hover{
   border-radius: 0.8rem;
   color: #ffffff;
   background-color: black;
+  margin: 0.5rem;
 }
 
 .type-button.receipts{
@@ -216,8 +222,14 @@ button:hover{
 
 /* NEW MOVEMENT */
 
-.new-movement{
+
+.new-div{
   width: 80%;
+  margin: auto;
+}
+
+.new-movement{
+  width: 100%;
   margin: 2em auto;
   background-color: #ffecec;
   position: relative;
@@ -291,7 +303,6 @@ button:hover{
   font-size: 1.4em;
   position: absolute;
   right: 0;
-  /* bottom: 0.75em; */
   }
 
   .new-movement .input #save {   

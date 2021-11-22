@@ -84,10 +84,40 @@ let mainController = {
     },
     add: async(req, res) => {
         try{
-            console.log(req.body);
             let body = req.body;
-            await db.Movements.create({...body})
+            await db.Movements.create({...body});
+            return res.status(200).json({
+                state: 200,
+                msj: "successful action",
+                data: req.body,
+            })
         }catch (err){
+            console.error(err);
+        }
+    },
+    edit: async(req, res) => {
+        try{
+            let body = req.body;
+            console.log(body);
+            await db.Movements.update({...body}, {where: {id: req.params.id}});
+            return res.status(200).json({
+                state: 200,
+                msj: "successful action",
+                data: req.body,
+            })
+        }catch(err){
+            console.error(err);
+        }
+    },
+    delete: async(req, res) => {
+        try{
+            await db.Movements.destroy({where: {id: req.params.id}});
+            return res.status(200).json({
+                state: 200,
+                msj: "successful action",
+                data: req.body,
+            })
+        }catch(err){
             console.error(err);
         }
     },

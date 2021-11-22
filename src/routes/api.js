@@ -14,6 +14,8 @@ router.get('/users/:id', apiController.userByPk);
 router.get('/movements/:id', apiController.movementsByUser);
 router.get('/movements/balance/:id', apiController.balanceByUser);
 router.post('/movements/add', apiController.add);
+router.post('/movements/edit/:id', apiController.edit);
+router.post('/movements/delete/:id', apiController.delete);
 
 
 
