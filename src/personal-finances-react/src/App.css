@@ -319,6 +319,8 @@ button:hover{
 }
 
 
+/* LOGIN */
+
 .session{
   background-color: #f2f2f2;
 }
@@ -365,6 +367,55 @@ button:hover{
 }
 
 .login .link{
+  text-decoration: underline;
+  color: blue;
+}
+
+
+/* REGISTER */
+
+.register{
+  padding: 2rem 0px;
+  width: 80%;
+  margin: auto;
+}
+
+.register .info{
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffecec;
+
+}
+
+.register .info input{
+  width: 100%;
+  margin: 0.5em auto;
+  height: 2rem;
+  padding: 0.3rem;
+  text-align: start;
+  border-radius: 0.4rem;
+  background-color: #ffffff;
+  border: #767676 solid 1px;
+  color: #000000;
+}
+
+.register .info #forgot{
+  margin: 0.3rem auto;
+  text-align: right;
+  width: 100%;
+  text-decoration: underline;
+  color: blue;
+  font-size: 0.8rem;
+}
+
+.register .info #register{
+  text-align: center;
+  width: 100%;
+  margin: 0.3rem auto;
+}
+
+.register .link{
   text-decoration: underline;
   color: blue;
 }
