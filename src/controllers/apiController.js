@@ -14,6 +14,22 @@ let mainController = {
             console.error(err);
         };
     },
+    login: async(req,res) => {
+        try{
+            let body = req.body;
+            let user = await db.Users.findOne({
+                where: {mail: body.mail, password: body.password},
+            });
+            console.log(user);
+            delete user.dataValues.password
+            return res.status(200).json({
+                status: 200,
+                data: user,
+            });
+        } catch(err){
+            console.error(err);
+        };
+    },
     userByPk: async (req, res) => {
         try{
             let user = await db.Users.findByPk(req.params.id);

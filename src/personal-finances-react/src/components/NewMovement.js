@@ -32,7 +32,7 @@ const NewMovement = (props) => {
     const [categories, setCategories] = useState([]);
 
     function onFocusFunction() {
-        ajax('http://192.168.0.15:3003/api/categories', 'get', setCategories, "");
+        ajax('http://192.168.55.107:3003/api/categories', 'get', setCategories, "");
     }
 
     function bodyToJSON() {
@@ -53,20 +53,20 @@ const NewMovement = (props) => {
     
     function saveFunction(){
         let bodyJSON = bodyToJSON();
-        ajax('http://192.168.0.15:3003/api/movements/add', 'post', "", bodyJSON );
+        ajax('http://192.168.55.107:3003/api/movements/add', 'post', "", bodyJSON );
         return props.exit();
     }
 
     function editFunction() {
         let bodyJSON = bodyToJSON();
-        ajax(`http://192.168.0.15:3003/api/movements/edit/${props.propsData.id}`, 'post', "", bodyJSON );
+        ajax(`http://192.168.55.107:3003/api/movements/edit/${props.propsData.id}`, 'post', "", bodyJSON );
         return window.location.reload();
         // return props.exit()
     }
 
     function deleteFunction() {
         let bodyJSON = bodyToJSON()
-        ajax(`http://192.168.0.15:3003/api/movements/delete/${props.propsData.id}`, 'post', "", bodyJSON );
+        ajax(`http://192.168.55.107:3003/api/movements/delete/${props.propsData.id}`, 'post', "", bodyJSON );
         return window.location.reload();
         // return props.exit()
     }

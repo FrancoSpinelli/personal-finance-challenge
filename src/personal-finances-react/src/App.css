@@ -371,6 +371,11 @@ button:hover{
   color: blue;
 }
 
+.login .link:hover{
+  cursor: pointer;
+  opacity: 0.8;
+}
+
 
 /* REGISTER */
 
@@ -418,4 +423,9 @@ button:hover{
 .register .link{
   text-decoration: underline;
   color: blue;
+}
+
+.register .link:hover{
+  cursor: pointer;
+  opacity: 0.8;
 }

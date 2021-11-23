@@ -6,6 +6,7 @@ let apiController = require ('../controllers/apiController');
 
 //USERS
 router.get('/users', apiController.users);
+router.post('/users/login', apiController.login);
 router.get('/users/:id', apiController.userByPk);
 
 
@@ -19,7 +20,7 @@ router.post('/movements/delete/:id', apiController.delete);
 
 
 
-//MOVEMENTS 
+//CATEGORIES 
 router.get('/categories', apiController.categories);
 
 module.exports = router;
