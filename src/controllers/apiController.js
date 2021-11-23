@@ -21,7 +21,7 @@ let mainController = {
             let user = await db.Users.findOne({
                 where: {mail: body.mail, password: body.password},
             });
-            delete user.dataValues.password
+            user !== null ? delete user.dataValues.password : null
             return res.status(200).json({
                 status: 200,
                 msj: "successful action",
@@ -34,15 +34,25 @@ let mainController = {
     register: async(req,res) => {
         try{
             let body = req.body;
-            let user = await db.Users.create({
-                ...body,
-                image: body.image === '' ? 'default.jpg' : body.image,
-            });
-            return res.status(200).json({
-                status: 200,
-                msj: "successful action",
-                data: user,
-            });
+            let userInDB = await db.Users.findOne({
+                where: {mail: body.mail}
+            })
+            if (userInDB === null){
+                let user = await db.Users.create({
+                    ...body,
+                    image: body.image === '' ? 'default.jpg' : body.image,
+                });
+                return res.status(200).json({
+                    status: 200,
+                    msj: "successful action",
+                    data: user,
+                });
+            } else {
+                return res.status(204).json({
+                    status: 204,
+                    msj: "user in data base",
+                })
+            }
         } catch(err){
             console.error(err);
         };
@@ -82,36 +92,41 @@ let mainController = {
     },
     balanceByUser: async(req, res) => {
         try{
-            let movements = await db.Movements.findAll();
-            let positiveBalance = movements.map(movement => {
-                if(movement.type === 'receipt'){
-                    return Number(movement.amount)
-                } else {
-                    return 0
-                }
-            }) 
-            positiveBalance = positiveBalance.reduce((acum, acumAct) => {
-                return acum + acumAct;
-            })
-            let negativeBalance = movements.map(movement => {
-                if(movement.type === 'expense'){
-                    return Number(movement.amount)
-                } else {
-                    return 0
-                }
-            }) 
-            negativeBalance = negativeBalance.reduce((acum, acumAct) => {
-                return acum + acumAct;
-            })
+            let movements = await db.Movements.findAll({
+                where: {user_id: req.params.id}
+            });
+            if (movements.length > 0){
+                let positiveBalance = movements.map(movement => {
+                    if(movement.type === 'receipt'){
+                        return Number(movement.amount)
+                    } else {
+                        return 0
+                    }
+                }) 
+                positiveBalance = positiveBalance.reduce((acum, acumAct) => {
+                    return acum + acumAct;
+                })
+                let negativeBalance = movements.map(movement => {
+                    if(movement.type === 'expense'){
+                        return Number(movement.amount)
+                    } else {
+                        return 0
+                    }
+                }) 
+                negativeBalance = negativeBalance.reduce((acum, acumAct) => {
+                    return acum + acumAct;
+                })
+                
+                return res.status(200).json({
+                    status: 200,
+                    data: {
+                        positive_balance: Math.round(positiveBalance),
+                        negative_balance: Math.round(negativeBalance),
+                        balance: Math.round(positiveBalance - negativeBalance)
+                    }
+                })
+            }
             
-            return res.status(200).json({
-                status: 200,
-                data: {
-                    positive_balance: Math.round(positiveBalance),
-                    negative_balance: Math.round(negativeBalance),
-                    balance: Math.round(positiveBalance - negativeBalance)
-                }
-            })
         }catch(err){
             console.error(err);
         }

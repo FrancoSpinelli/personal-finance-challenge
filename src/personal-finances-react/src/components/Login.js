@@ -10,10 +10,11 @@ const Login = () => {
     let inputMail = useRef();
     let inputPassword = useRef();
     let inputImage = useRef();
+    let textError = useRef();
 
     const cookies = new Cookie();
 
-    function ajax(url, method, setState, bodyJSON) {
+    function ajax(url, method, setState, bodyJSON, callback) {
         const http = new XMLHttpRequest();
         http.open(method, url);
         if(method === "post"){
@@ -29,7 +30,14 @@ const Login = () => {
                         cookies.set('mail', response.data.mail, {path: "/"});
                         cookies.set('image', response.data.image, {path: "/"});
                         window.location.href = '/';
+                        console.log(response);
                     } 
+                        callback()
+                } else if (this.status === 204){
+                    inputMail.current.focus() 
+                    inputPassword.current.value = "" 
+                    textError.current.innerText = "The email is already in use.";
+
                 }
             }
         }
@@ -45,24 +53,38 @@ const Login = () => {
     }
 
     function loginFunction() {
-        let body = {
-            mail: inputMail.current.value,
-            password: inputPassword.current.value,
-        } 
-        let bodyJSON = JSON.stringify(body);
-        ajax(`http://192.168.55.107:3003/api/users/login`, 'post', "", bodyJSON );
+        if (inputMail.current.value !== "" && inputPassword.current.value !== ""){
+            let body = {
+                mail: inputMail.current.value,
+                password: inputPassword.current.value,
+            } 
+            let bodyJSON = JSON.stringify(body);
+            ajax(`http://192.168.55.107:3003/api/users/login`, 'post', "", bodyJSON, () => {
+                textError.current.innerText = "Incorrect mail or password.";
+                inputMail.current.value = inputMail.current.value;
+                inputPassword.current.value = null;
+                inputPassword.current.focus();
+            } );
+        } else {
+            textError.current.innerText = "Mail and password cannot be empty.";
+            inputMail.current.value === "" ? inputMail.current.focus() : inputPassword.current.focus();
+        }
     }
 
     function registerFunction() {
-        let body = {
-            first_name: inputFirstName.current.value,
-            last_name: inputLastName.current.value,
-            mail: inputMail.current.value,
-            password: inputPassword.current.value,
-            image: inputImage.current.value,
-        } 
-        let bodyJSON = JSON.stringify(body);
-        ajax(`http://192.168.55.107:3003/api/users/register`, 'post', "", bodyJSON );
+        if (inputFirstName.current.value !== "" && inputLastName.current.value !== "" && inputMail.current.value !== "" && inputPassword.current.value !== ""){
+            let body = {
+                first_name: inputFirstName.current.value,
+                last_name: inputLastName.current.value,
+                mail: inputMail.current.value,
+                password: inputPassword.current.value,
+                image: inputImage.current.value,
+            } 
+            let bodyJSON = JSON.stringify(body);
+            ajax(`http://192.168.55.107:3003/api/users/register`, 'post', "", bodyJSON );
+        } else {
+            textError.current.innerText = "First name, last name, mail and password cannot be empty.";
+        }
     }
     
     const [register, setRegister] = useState(false);
@@ -80,7 +102,11 @@ const Login = () => {
                     <div className="info">
                         <input ref={inputMail} type="email" placeholder="Mail" autoComplete="email" autoFocus/>
                         <input ref={inputPassword} type="password" placeholder="Password"/>
-                        <p id="forgot">Forgot password?</p>
+                        <div className="errors">
+                            <p ref={textError} className="error"></p>
+                            <p className="link" id="forgot">Forgot password?</p>
+                        </div>
+
                         <span onClick={loginFunction}><ButtonType type="receipt" name="Sign In"/></span>
                         <p id="register">First time here? <span onClick={formChangeFunction} className="link">Create an account.</span></p>
                     </div>
@@ -91,11 +117,15 @@ const Login = () => {
                 <section className="register">
                     <Title name="Sign up"/>
                     <div className="info">
-                        <input ref={inputFirstName} type="text" placeholder="First name" autoComplete="given-name"/>
-                        <input ref={inputLastName} type="text" placeholder="Last name" autoComplete="family-name"/>
-                        <input ref={inputMail} type="email" placeholder="Mail" autoComplete="email"/>
-                        <input ref={inputPassword} type="password" placeholder="Password"/>
+                        <input ref={inputFirstName} type="text" placeholder="First name*" autoComplete="given-name"/>
+                        <input ref={inputLastName} type="text" placeholder="Last name*" autoComplete="family-name"/>
+                        <input ref={inputMail} type="email" placeholder="Mail*" autoComplete="email"/>
+                        <input ref={inputPassword} type="password" placeholder="Password*"/>
                         <input ref={inputImage} type="file"/>
+                        <div className="errors">
+                            <p ref={textError} className="error"></p>
+                        </div>
+
                         <span onClick={registerFunction} ><ButtonType type="receipt" name="Sign up"/></span>
                         <p id="register"><span onClick={formChangeFunction} className="link">Already have an account?</span></p>
                     </div>

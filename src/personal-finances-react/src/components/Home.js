@@ -10,7 +10,7 @@ import Cookie from 'universal-cookie';
 const Home = () => {
 
     const cookies = new Cookie();
-
+    const userID = cookies.get('id');
 
     function ajax(url, method, setState, bodyJSON) {
         const http = new XMLHttpRequest();
@@ -35,8 +35,8 @@ const Home = () => {
 
     const [change, setChange] = useState(false);
     useEffect(() => {
-        ajax(`http://192.168.55.107:3003/api/movements/${cookies.get('id')}`, 'get', setMovements);
-        ajax(`http://192.168.55.107:3003/api/movements/balance/${cookies.get('id')}`, 'get', setBalance);
+        ajax(`http://192.168.55.107:3003/api/movements/${userID}`, 'get', setMovements);
+        ajax(`http://192.168.55.107:3003/api/movements/balance/${userID}`, 'get', setBalance);
         setChange(false)
     }, [change]);
 
