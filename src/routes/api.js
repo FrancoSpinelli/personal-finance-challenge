@@ -7,6 +7,7 @@ let apiController = require ('../controllers/apiController');
 //USERS
 router.get('/users', apiController.users);
 router.post('/users/login', apiController.login);
+router.post('/users/register', apiController.register);
 router.get('/users/:id', apiController.userByPk);
 
 

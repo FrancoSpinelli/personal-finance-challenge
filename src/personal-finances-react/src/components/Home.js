@@ -35,8 +35,8 @@ const Home = () => {
 
     const [change, setChange] = useState(false);
     useEffect(() => {
-        ajax('http://192.168.55.107:3003/api/movements/1', 'get', setMovements);
-        ajax('http://192.168.55.107:3003/api/movements/balance/1', 'get', setBalance);
+        ajax(`http://192.168.55.107:3003/api/movements/${cookies.get('id')}`, 'get', setMovements);
+        ajax(`http://192.168.55.107:3003/api/movements/balance/${cookies.get('id')}`, 'get', setBalance);
         setChange(false)
     }, [change]);
 

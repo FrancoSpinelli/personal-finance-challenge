@@ -5,8 +5,11 @@ import Cookie from 'universal-cookie';
 
 const Login = () => {
 
+    let inputFirstName = useRef();
+    let inputLastName = useRef();
     let inputMail = useRef();
     let inputPassword = useRef();
+    let inputImage = useRef();
 
     const cookies = new Cookie();
 
@@ -49,10 +52,22 @@ const Login = () => {
         let bodyJSON = JSON.stringify(body);
         ajax(`http://192.168.55.107:3003/api/users/login`, 'post', "", bodyJSON );
     }
+
+    function registerFunction() {
+        let body = {
+            first_name: inputFirstName.current.value,
+            last_name: inputLastName.current.value,
+            mail: inputMail.current.value,
+            password: inputPassword.current.value,
+            image: inputImage.current.value,
+        } 
+        let bodyJSON = JSON.stringify(body);
+        ajax(`http://192.168.55.107:3003/api/users/register`, 'post', "", bodyJSON );
+    }
     
     const [register, setRegister] = useState(false);
 
-    function registerFunction() {
+    function formChangeFunction() {
         register === false ? setRegister(true) : setRegister(false);
     }
 
@@ -67,7 +82,7 @@ const Login = () => {
                         <input ref={inputPassword} type="password" placeholder="Password"/>
                         <p id="forgot">Forgot password?</p>
                         <span onClick={loginFunction}><ButtonType type="receipt" name="Sign In"/></span>
-                        <p id="register">First time here? <span onClick={registerFunction} className="link">Create an account.</span></p>
+                        <p id="register">First time here? <span onClick={formChangeFunction} className="link">Create an account.</span></p>
                     </div>
                 </section>
             }
@@ -76,13 +91,13 @@ const Login = () => {
                 <section className="register">
                     <Title name="Sign up"/>
                     <div className="info">
-                        <input type="text" placeholder="First name" autoComplete="given-name"/>
-                        <input type="text" placeholder="Last name" autoComplete="family-name"/>
-                        <input type="email" placeholder="Mail" autoComplete="email"/>
-                        <input type="password" placeholder="Password"/>
-                        <input type="file"/>
-                        <ButtonType type="receipt" name="Sign up"/>
-                        <p id="register"><span onClick={registerFunction} className="link">Already have an account?</span></p>
+                        <input ref={inputFirstName} type="text" placeholder="First name" autoComplete="given-name"/>
+                        <input ref={inputLastName} type="text" placeholder="Last name" autoComplete="family-name"/>
+                        <input ref={inputMail} type="email" placeholder="Mail" autoComplete="email"/>
+                        <input ref={inputPassword} type="password" placeholder="Password"/>
+                        <input ref={inputImage} type="file"/>
+                        <span onClick={registerFunction} ><ButtonType type="receipt" name="Sign up"/></span>
+                        <p id="register"><span onClick={formChangeFunction} className="link">Already have an account?</span></p>
                     </div>
                 </section>
             }

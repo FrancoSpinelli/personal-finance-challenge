@@ -7,6 +7,7 @@ let mainController = {
             let users = await db.Users.findAll();
             return res.status(200).json({
                 status: 200,
+                msj: "successful action",
                 length: users.length,
                 data: users,
             });
@@ -20,10 +21,26 @@ let mainController = {
             let user = await db.Users.findOne({
                 where: {mail: body.mail, password: body.password},
             });
-            console.log(user);
             delete user.dataValues.password
             return res.status(200).json({
                 status: 200,
+                msj: "successful action",
+                data: user,
+            });
+        } catch(err){
+            console.error(err);
+        };
+    },
+    register: async(req,res) => {
+        try{
+            let body = req.body;
+            let user = await db.Users.create({
+                ...body,
+                image: body.image === '' ? 'default.jpg' : body.image,
+            });
+            return res.status(200).json({
+                status: 200,
+                msj: "successful action",
                 data: user,
             });
         } catch(err){
@@ -35,6 +52,7 @@ let mainController = {
             let user = await db.Users.findByPk(req.params.id);
             return res.status(200).json({
                 status: 200,
+                msj: "successful action",
                 data: user,
             });
         }catch (err){
@@ -114,7 +132,6 @@ let mainController = {
     edit: async(req, res) => {
         try{
             let body = req.body;
-            console.log(body);
             await db.Movements.update({...body}, {where: {id: req.params.id}});
             return res.status(200).json({
                 state: 200,
@@ -143,6 +160,7 @@ let mainController = {
             let categories = await db.Categories.findAll();
             return res.status(200).json({
                 status: 200,
+                msj: "successful action",
                 length: categories.length,
                 data: categories,
             });

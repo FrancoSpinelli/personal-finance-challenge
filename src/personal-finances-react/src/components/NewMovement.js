@@ -1,9 +1,12 @@
 import React, {useState, useRef} from 'react';
 import Title from '../components/Title';
 import ButtonType from '../components/Buttons/Type';
+import Cookies from 'universal-cookie';
 
 const NewMovement = (props) => {
     
+    const cookies = new Cookies();
+
     let dateInput = useRef();
     let amountInput = useRef();
     let conceptInput = useRef();
@@ -45,7 +48,7 @@ const NewMovement = (props) => {
             amount: Number(amount),
             concept: conceptInput.current.value,
             category_id: Number(categoryInput.current.value),
-            user_id: 1,
+            user_id: cookies.get('id'),
             type: props.movement,
         }
         return JSON.stringify(body);
