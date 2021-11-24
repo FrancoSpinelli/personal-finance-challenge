@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `personal_finances`.`movements` (
   `category_id` INT NOT NULL DEFAULT 1,
   `type` VARCHAR(255) NOT NULL,
   `date` DATE NOT NULL,
-  `amount` DECIMAL(5,2) UNSIGNED NOT NULL,
+  `amount` DECIMAL(7,2) UNSIGNED NOT NULL,
   `concept` TEXT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `categoriy_id_idx` (`category_id` ASC),

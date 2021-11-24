@@ -30,11 +30,13 @@ const Home = () => {
         }
     }
 
+    const [user, setUser] = useState([]);
     const [movements, setMovements] = useState([]);
     const [balance, setBalance] = useState("");
 
     const [change, setChange] = useState(false);
     useEffect(() => {
+        ajax(`http://192.168.55.107:3003/api/users/${userID}`, 'get', setUser);
         ajax(`http://192.168.55.107:3003/api/movements/${userID}`, 'get', setMovements);
         ajax(`http://192.168.55.107:3003/api/movements/balance/${userID}`, 'get', setBalance);
         setChange(false)
@@ -63,10 +65,14 @@ const Home = () => {
             }
             {cookies.get('mail') && 
                 <section className="home">
-                <Header/>
-                { balance.data && 
-                    <Balance balance={balance.data.balance}/>
+                <Header image={user.data ? user.data.image : ""}/>
+                { balance.data &&  
+                    <Balance exit={exitFunction} balance={balance.data.balance} />
                 }
+                { !balance.data &&  
+                    <Balance exit={exitFunction} balance={0} />
+                }
+                
                 <div className="buttons-type">
                     <span onClick={onClickReceiptsFunction}><ButtonType type="receipt" name="Receipt"/></span>
                     <span onClick={onClickExpensesFunction}><ButtonType type="expense" name="Expense"/></span>
@@ -76,8 +82,8 @@ const Home = () => {
                         <NewMovement type="New" exit={exitFunction} movement={type}/>
                     </div>
                 }
-                {movements.length > 1 &&
-                    <Lastmovements movements={movements}/>
+                {movements.length > 0 &&
+                    <Lastmovements exit={exitFunction} movements={movements}/>
                 }
             </section>
             }

@@ -159,16 +159,36 @@ button:hover{
   background-color: #ffecec;  
 }
 
+.balance label{
+  width: 5rem;
+  height: 5rem;
+  padding: 0.3rem;
+  margin: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-.balance img {
-  margin: 0.5em;
-  padding: 0.7em;
-  width: 30%;
+.balance label img{
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
+}
+
+.balance label img:hover{
+  cursor: pointer;
+  opacity: 0.8;
+  border: 1px solid #000000;
+}
+
+
+.balance #image-profile{
+  display: none;
 }
 
 .balance p {
   font-size: 1rem;
+  margin-left: 0.5rem;
 }
 
 .balance.green{
@@ -391,6 +411,13 @@ button:hover{
 }
 
 
+.login .info .button-span{
+  display: flex;
+  margin: 0.7rem auto;
+  justify-content: center;
+}
+
+
 /* REGISTER */
 
 .register{
@@ -455,4 +482,10 @@ button:hover{
   width: 90%;
   color: red;
   margin-left: 0.2rem;
+}
+
+.register .info .button-span{
+  display: flex;
+  margin: 0.7rem auto;
+  justify-content: center;
 }

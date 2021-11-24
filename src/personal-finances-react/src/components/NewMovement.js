@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import Title from '../components/Title';
 import ButtonType from '../components/Buttons/Type';
 import Cookies from 'universal-cookie';
@@ -15,7 +15,7 @@ const NewMovement = (props) => {
 
     function ajax(url, method, setState, bodyJSON) {
         const http = new XMLHttpRequest();
-        http.open(method, url);
+        http.open(method, url, true);
         if(method === "post"){
             http.setRequestHeader('Content-Type', 'application/json')
             http.send(bodyJSON);
@@ -34,9 +34,11 @@ const NewMovement = (props) => {
 
     const [categories, setCategories] = useState([]);
 
-    function onFocusFunction() {
+
+    useEffect(() => {
         ajax('http://192.168.55.107:3003/api/categories', 'get', setCategories, "");
-    }
+    }, []);
+    
 
     function bodyToJSON() {
         let amount = amountInput.current.value;
@@ -63,22 +65,22 @@ const NewMovement = (props) => {
     function editFunction() {
         let bodyJSON = bodyToJSON();
         ajax(`http://192.168.55.107:3003/api/movements/edit/${props.propsData.id}`, 'post', "", bodyJSON );
-        return window.location.reload();
-        // return props.exit()
+        // return window.location.reload();
+        return props.exit()
     }
 
     function deleteFunction() {
         let bodyJSON = bodyToJSON()
         ajax(`http://192.168.55.107:3003/api/movements/delete/${props.propsData.id}`, 'post', "", bodyJSON );
-        return window.location.reload();
-        // return props.exit()
+        // return window.location.reload();
+        return props.exit()
     }
 
     let dateNow = new Date(Date.now());
     dateNow = `${dateNow.getUTCFullYear()}-${dateNow.getUTCMonth()+1}-${dateNow.getUTCDate()}`
 
     return (
-        <div className="new-movement" onFocus={onFocusFunction}>
+        <div className="new-movement">
             <button onClick={props.exit} className="exit"><i className="far fa-times-circle"></i></button>
             <Title exit={props.exit} name={`${props.type} ${props.movement}`}/>
             <section className="input">

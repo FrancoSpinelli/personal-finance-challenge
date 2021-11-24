@@ -20,6 +20,7 @@ const Movement = (props) => {
     const [options, setOptions] = useState(false);
 
     function exitFunction() {
+        props.exit()
         setOptions(false)
     }
 
@@ -44,7 +45,7 @@ const Movement = (props) => {
                 <i onClick={optionsFunction} ref={iconOptions} className="fas fa-pencil-alt"></i>
             </section>
             {   options === true &&
-                    <NewMovement exit={exitFunction} propsData={props} key={props.id} type="Edit" movement={props.type}/> 
+                <NewMovement exit={exitFunction} propsData={props} key={props.id} type="Edit" movement={props.type}/> 
             }
 
 

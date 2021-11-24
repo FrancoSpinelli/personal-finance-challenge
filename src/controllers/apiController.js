@@ -1,4 +1,5 @@
 let db = require('../database/models');
+let path = require('path');
 
 let mainController = {
     //USERS
@@ -34,13 +35,17 @@ let mainController = {
     register: async(req,res) => {
         try{
             let body = req.body;
-            let userInDB = await db.Users.findOne({
-                where: {mail: body.mail}
-            })
+            let userInDB;
+            if (body.mail){
+                userInDB = await db.Users.findOne({
+                    where: {mail: body.mail}
+                })
+            }
             if (userInDB === null){
+                let image = req.file ? req.file.filename : "default.jpg";
                 let user = await db.Users.create({
                     ...body,
-                    image: body.image === '' ? 'default.jpg' : body.image,
+                    image: image,
                 });
                 return res.status(200).json({
                     status: 200,
@@ -65,6 +70,27 @@ let mainController = {
                 msj: "successful action",
                 data: user,
             });
+        }catch (err){
+            console.error(err)
+        }
+    },
+    userEdit: async (req, res) => {
+        try{
+            let user = await db.Users.findByPk(req.params.id);
+            if ( path.extname(req.file.filename) === ".jpeg" || path.extname(req.file.filename) === ".jpg"){
+                await db.Users.update({image: req.file.filename}, {where: {id: req.params.id}})
+                return res.status(200).json({
+                    status: 200,
+                    msj: "successful action",
+                    data: user,
+                });
+            } else {
+                return res.status(204).json({
+                    status: 204,
+                    msj: "invalid image format",
+                    data: user,
+                });
+            }
         }catch (err){
             console.error(err)
         }
@@ -116,13 +142,12 @@ let mainController = {
                 negativeBalance = negativeBalance.reduce((acum, acumAct) => {
                     return acum + acumAct;
                 })
-                
                 return res.status(200).json({
                     status: 200,
                     data: {
-                        positive_balance: Math.round(positiveBalance),
-                        negative_balance: Math.round(negativeBalance),
-                        balance: Math.round(positiveBalance - negativeBalance)
+                        positive_balance: positiveBalance,
+                        negative_balance: negativeBalance,
+                        balance: (positiveBalance - negativeBalance).toFixed(2)
                     }
                 })
             }

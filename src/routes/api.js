@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const multerMiddleware = require ('../Middlewares/multerMiddleware');
 
 let apiController = require ('../controllers/apiController');
 
@@ -7,8 +8,9 @@ let apiController = require ('../controllers/apiController');
 //USERS
 router.get('/users', apiController.users);
 router.post('/users/login', apiController.login);
-router.post('/users/register', apiController.register);
+router.post('/users/register', multerMiddleware.single('image') ,apiController.register);
 router.get('/users/:id', apiController.userByPk);
+router.post('/users/edit/:id', multerMiddleware.single('image'), apiController.userEdit);
 
 
 
