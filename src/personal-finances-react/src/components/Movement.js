@@ -33,7 +33,7 @@ const Movement = (props) => {
                     <img src={iconCategory(`./${props.category.image}`).default} alt="category"/>
                     <div className="detail">
                         <p id="concept">{props.concept}</p>
-                        <p>{props.category.name}</p>
+                        <p id="category">{props.category.name}</p>
                     </div>
                 </div>
                 {props.type === "receipt" &&

@@ -34,12 +34,29 @@ const Lastmovements = (props) => {
     useEffect(() => {
         ajax(`http://192.168.55.107:3003/api/movements/${cookies.get('id')}`, 'get', setMovements);
     }, [props.movements]);
+
+    const [more, setMore] = useState(false);
+    function viewMoreFunction() {
+        more === false ? setMore(true) : setMore(false)
+    }
     return (
 
         <div className="last-movements">
             <Title name="Last movements"/>
             { movements.length > 0 &&
-                movements.data.map((movement)  => <Movement exit={props.exit} key={movement.id} {...movement} />)
+                movements.data.map((movement, i)  => {
+                    if(more === false && i < 10){
+                        return <Movement exit={props.exit} key={movement.id} {...movement}/>
+                    } else if(more === true){
+                        return <Movement exit={props.exit} key={movement.id} {...movement}/>
+                    }
+                })
+            }
+            { more === false && movements.length > 10 &&
+                <span onClick={viewMoreFunction} className="view-more"><i class="far fa-caret-square-down"></i></span>
+            }
+            { more === true &&
+                <span onClick={viewMoreFunction} className="view-more"><i class="far fa-caret-square-up"></i></span>
             }
         </div>
     );

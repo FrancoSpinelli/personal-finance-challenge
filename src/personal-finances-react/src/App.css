@@ -2,10 +2,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Spectral SC', serif;;
 }
 
 .home{
   background-color: #f2f2f2;
+  min-height: 100vh;
 }
 
 
@@ -13,8 +15,8 @@
 
 .title{
   text-align: center;
-  font-size: 1.2rem;
-  padding: 0.7em;
+  font-size: 1rem;
+  padding: 0.7rem;
   background-color: #9869d174;
   border-radius: 0.8em 0.8em 0 0;
   position: relative;
@@ -53,10 +55,10 @@ button:hover{
 }
 
 .movement div img {
-  width: 3rem;
+  width: 2.5rem;
   border-radius: 0.2rem;
-  margin: 0.7rem;
-  padding: 0.4rem;
+  margin: 0.7em;
+  padding: 0.4em;
   background-color: #ffffff;
 }
 
@@ -72,7 +74,7 @@ button:hover{
 
 .movement i{
   position: absolute;
-  right: 0.6rem;
+  right: 0.6em;
 }
 
 .movement i:hover{
@@ -81,15 +83,20 @@ button:hover{
 }
 
 .movement #concept{
-  font-size: 1rem;
+  font-size: 0.7rem;
   font-weight: bold;
+}
+
+.movement #category{
+  font-size: 0.5rem;
 }
 
 .movement #amount{
   font-weight: bold;
-  margin-right: 2rem;
+  margin-right: 1.7rem;
   text-align: right;
-  width: 25%;
+  width: 28%;
+  font-size: 0.75rem;
 }
 
 .movement #amount.red{
@@ -98,6 +105,22 @@ button:hover{
 
 .movement #amount.green{
   color: #0d9d0de0;
+}
+
+.view-more{
+  background-color: #ffecec;
+  display: flex;
+  align-items: center;
+  justify-content: center ;
+}
+
+.view-more i{
+  font-size: 2rem;
+}
+
+.view-more i:hover{
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 
@@ -120,7 +143,7 @@ button:hover{
 }
 
 .header h1 {
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
 .header .log-in{
@@ -151,6 +174,7 @@ button:hover{
   width: 80%;
   margin: 2rem auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: left;
   font-size: 1rem;
@@ -159,11 +183,19 @@ button:hover{
   background-color: #ffecec;  
 }
 
+.balance .info{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  font-size: 1rem;
+}
+
 .balance label{
   width: 5rem;
   height: 5rem;
   padding: 0.3rem;
-  margin: 0.2rem;
+  margin: 0.50rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,7 +219,6 @@ button:hover{
 }
 
 .balance p {
-  font-size: 1rem;
   margin-left: 0.5rem;
 }
 
@@ -209,13 +240,21 @@ button:hover{
   color: #c72a2ade;
 }
 
+.balance .errors{
+  text-align: center;
+}
+
+.balance .errors .error-balance{
+  color: #c72a2ade;
+  font-size: 0.8rem;
+}
 
 /* BUTTONS TYPE */
 
 .type-button{
   min-width: 7rem ;
   font-size: 0.9rem;
-  padding: 0.8rem;
+  padding: 0.6rem;
   border-radius: 0.8rem;
   color: #ffffff;
   background-color: black;
@@ -250,7 +289,7 @@ button:hover{
 
 .new-movement{
   width: 100%;
-  margin: 2em auto;
+  margin: 2rem auto 0;
   background-color: #ffecec;
   position: relative;
 }
@@ -330,23 +369,42 @@ button:hover{
     margin: 0.8em 0;
   }
 
+  .new-movement .errors{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.4rem 0;
+  }
+  
+  .new-movement .errors .error{
+    width: 90%;
+    color: red;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+
 
 /* LAST MOVEMENTS */
 
 .last-movements{
   width: 80%;
-  margin: 1rem auto;
+  padding: 1rem 0;
+  margin: 1rem auto 0;
 }
 
 
 /* LOGIN */
 
 .session{
+  height: 100vh;
   background-color: #f2f2f2;
+  display: flex;
+  align-items: center;
 }
 
 .login{
-  padding: 2rem 0px;
+  padding: 2rem 0;
   width: 80%;
   margin: auto;
 }
@@ -356,14 +414,13 @@ button:hover{
   display: flex;
   flex-direction: column;
   background-color: #ffecec;
-
 }
 
 .login .info input{
   width: 100%;
   margin: 0.5em auto;
   height: 2rem;
-  padding: 0.3rem;
+  padding: 0.5rem;
   text-align: start;
   border-radius: 0.4rem;
   background-color: #ffffff;
@@ -377,18 +434,26 @@ button:hover{
   width: 100%;
   text-decoration: underline;
   color: blue;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+}
+
+.login .info .button-span{
+  display: flex;
+  margin: 0.5rem auto;
+  justify-content: center;
 }
 
 .login .info #register{
   text-align: center;
   width: 100%;
   margin: 0.3rem auto;
+  font-size: 0.7rem;
 }
 
 .login .link{
   text-decoration: underline;
   color: blue;
+  font-size: 0.7rem;
 }
 
 .login .link:hover{
@@ -408,20 +473,16 @@ button:hover{
   width: 90%;
   color: red;
   margin-left: 0.2rem;
+  font-size: 0.7rem;
 }
 
 
-.login .info .button-span{
-  display: flex;
-  margin: 0.7rem auto;
-  justify-content: center;
-}
 
 
 /* REGISTER */
 
 .register{
-  padding: 2rem 0px;
+  padding: 2rem 0;
   width: 80%;
   margin: auto;
 }
@@ -438,7 +499,7 @@ button:hover{
   width: 100%;
   margin: 0.5em auto;
   height: 2rem;
-  padding: 0.3rem;
+  padding: 0.5rem;
   text-align: start;
   border-radius: 0.4rem;
   background-color: #ffffff;
@@ -459,6 +520,7 @@ button:hover{
   text-align: center;
   width: 100%;
   margin: 0.3rem auto;
+  font-size: 0.7rem ;
 }
 
 .register .link{
@@ -482,10 +544,162 @@ button:hover{
   width: 90%;
   color: red;
   margin-left: 0.2rem;
+  font-size: 0.7rem;
 }
 
 .register .info .button-span{
   display: flex;
   margin: 0.7rem auto;
   justify-content: center;
+}
+
+
+
+
+
+@media (min-width: 489px) {
+  *{
+    font-size: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.4rem;
+  }
+
+  .login{
+    padding: 2rem 0;
+    width: 80%;
+    margin: auto;
+  }
+
+  .login .info{
+    padding: 1rem;
+  }
+  .movement #concept{
+    font-size: 0.9rem;
+  }
+  
+  .movement #category{
+    font-size: 0.6rem;
+  }
+  
+  .movement #amount{
+    margin-right: 2rem;
+    font-size: 0.9rem;
+  }
+}
+
+
+
+@media (min-width: 679px) {
+  *{
+    font-size: 18px;
+  }
+
+  
+  .header .logo {
+    width: 4rem;
+    height: 4rem;
+  }
+  
+  .header h1 {
+    width: 60%;
+    text-align: center;
+    font-size: 1.6rem;
+  }
+  
+  
+  .header .log-in img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin: 0.3rem;
+  }
+  
+  .header .log-in p{
+    font-size: 0.9rem;
+  }
+  
+  .title{
+    font-size: 1.2rem;
+  }
+
+  .movement p{
+    font-size: 0.9rem;
+  }
+
+  .movement i{
+    font-size: 0.9rem;
+    position: absolute;
+    right: 0.5em;
+  }
+
+  .type-button{
+    padding: 0.5rem;
+    margin: 0.4rem;
+  }
+
+  .balance label{
+    width: 8rem;
+    height: 8rem;
+  }
+  
+  .balance label img{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+  } 
+
+  .balance .errors .error-balance{
+    font-size: 1rem;
+  }
+
+  .login, .register{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+    width: 40%;
+    margin: auto;
+  }
+
+  .login .info #register{
+    font-size: 1rem;
+  }
+
+  .register .info #register{
+    font-size: 1rem ;
+  }
+
+  .register .info .errors .error{
+    font-size: 1rem;
+  }
+  
+  .login .errors .error{
+    font-size: 1rem;
+  }
+  
+  .login .link{
+    font-size: 1rem;
+  }
+
+  .balance, .buttons-type{
+    width: 50%;
+  }
+
+  .new-div, .last-movements{
+    width: 50%;
+  }
+
+  .new-movement .input div input, select{
+    margin: 0.6rem 0;
+  }
+
+  .new-movement .exit{
+    font-size: 2rem;
+    position: absolute;
+    top: -.2rem;
+    right: 1rem;
+  }
+  
+
 }

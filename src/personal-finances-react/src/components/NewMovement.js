@@ -42,9 +42,6 @@ const NewMovement = (props) => {
 
     function bodyToJSON() {
         let amount = amountInput.current.value;
-        // if (amount.includes(',')){
-        //     amount = amount.replace(',','.');
-        // }
         let body = {
             date: dateInput.current.value,
             amount: Number(amount),
@@ -55,24 +52,46 @@ const NewMovement = (props) => {
         }
         return JSON.stringify(body);
     }
+
+    function validationsFunction() {
+        let error = document.querySelector('.error');
+        let errors = false;
+        if(amountInput.current.value === '' || conceptInput.current.value === ""){
+            error.innerText = "Amount and concept cannot by empty."
+            return errors = true;
+        }
+        if (isNaN(amountInput.current.value)) {
+            error.innerText = "Amount is not a number."
+            return errors = true;
+        }
+        if (errors === false) {
+            error.innerText = "";
+        }
+        return errors
+    }
     
     function saveFunction(){
-        let bodyJSON = bodyToJSON();
-        ajax('http://192.168.55.107:3003/api/movements/add', 'post', "", bodyJSON );
-        return props.exit();
+        let errors = validationsFunction();
+        if (errors === false){
+            let bodyJSON = bodyToJSON();
+            ajax('http://192.168.55.107:3003/api/movements/add', 'post', "", bodyJSON );
+            return props.exit();
+        }
+        
     }
 
     function editFunction() {
-        let bodyJSON = bodyToJSON();
-        ajax(`http://192.168.55.107:3003/api/movements/edit/${props.propsData.id}`, 'post', "", bodyJSON );
-        // return window.location.reload();
-        return props.exit()
+        let errors = validationsFunction();
+        if (errors === false){
+            let bodyJSON = bodyToJSON();
+            ajax(`http://192.168.55.107:3003/api/movements/edit/${props.propsData.id}`, 'post', "", bodyJSON );
+            return props.exit() 
+        }
     }
 
     function deleteFunction() {
         let bodyJSON = bodyToJSON()
         ajax(`http://192.168.55.107:3003/api/movements/delete/${props.propsData.id}`, 'post', "", bodyJSON );
-        // return window.location.reload();
         return props.exit()
     }
 
@@ -104,6 +123,11 @@ const NewMovement = (props) => {
                             })
                         }
                     </select>
+                </div>
+                <div className="errors">
+                    <p className="error">
+
+                    </p>
                 </div>
                 { !props.propsData && 
                     <div id="save">

@@ -1,5 +1,6 @@
 let db = require('../database/models');
 let path = require('path');
+let fs = require('fs');
 
 let mainController = {
     //USERS
@@ -22,12 +23,21 @@ let mainController = {
             let user = await db.Users.findOne({
                 where: {mail: body.mail, password: body.password},
             });
-            user !== null ? delete user.dataValues.password : null
-            return res.status(200).json({
-                status: 200,
-                msj: "successful action",
-                data: user,
-            });
+            user !== null ? delete user.dataValues.password : null;
+            if (user !== null) {
+                return res.status(200).json({
+                    status: 200,
+                    msj: "successful action",
+                    data: user,
+                });
+            }else{
+                return res.status(200).json({
+                    status: 204,
+                    msj: "user not found",
+                    data: null,
+                });
+            }
+
         } catch(err){
             console.error(err);
         };
@@ -53,9 +63,10 @@ let mainController = {
                     data: user,
                 });
             } else {
-                return res.status(204).json({
+                return res.status(200).json({
                     status: 204,
                     msj: "user in data base",
+                    data: null,
                 })
             }
         } catch(err){
@@ -85,10 +96,12 @@ let mainController = {
                     data: user,
                 });
             } else {
-                return res.status(204).json({
+                console.log(req.file.filename);
+                fs.unlinkSync(path.join(__dirname, `../personal-finances-react/src/assets/img/users/${req.file.filename}`));
+                return res.status(200).json({
                     status: 204,
                     msj: "invalid image format",
-                    data: user,
+                    data: null,
                 });
             }
         }catch (err){

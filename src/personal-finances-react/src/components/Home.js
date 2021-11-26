@@ -59,7 +59,7 @@ const Home = () => {
     return (
         <React.Fragment>
             {!cookies.get('mail') && 
-                <section className="sesison">
+                <section className="session">
                     <Login/>
                 </section>
             }

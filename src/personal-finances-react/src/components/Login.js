@@ -26,12 +26,10 @@ const Login = () => {
                         cookies.set('id', response.data.id, {path: "/",});
                         cookies.set('mail', response.data.mail, {path: "/"});
                         window.location.href = '/';
-                    } 
-                } else if (this.status === 204){
-                    inputMail.current.focus();
-                    inputPassword.current.value = "" ;
-                    textError.current.innerText = "The email is already in use.";
-
+                    }
+                    if(response.status === 204){
+                        callback()
+                    }
                 }
             }
         }
@@ -76,7 +74,11 @@ const Login = () => {
             let bodyJSON = JSON.stringify(body);
             
             
-            ajax(`http://192.168.55.107:3003/api/users/register`, 'post', "", bodyJSON);
+            ajax(`http://192.168.55.107:3003/api/users/register`, 'post', "", bodyJSON, () => {
+                inputMail.current.focus();
+                inputPassword.current.value = "" ;
+                textError.current.innerText = "The email is already in use.";
+            });
         } else {
             textError.current.innerText = "First name, last name, mail and password cannot be empty.";
         }
@@ -99,8 +101,8 @@ const Login = () => {
                         <input ref={inputPassword} type="password" placeholder="Password"/>
                         <div className="errors">
                             <p ref={textError} className="error"></p>
-                            <p className="link" id="forgot">Forgot password?</p>
                         </div>
+                            <p className="link" id="forgot">Forgot password?</p>
                         <span className="button-span" onClick={loginFunction}><ButtonType type="receipt" name="Sign In"/></span>
                         <p id="register">First time here? <span onClick={formChangeFunction} className="link">Create an account.</span></p>
                     </div>
@@ -111,7 +113,7 @@ const Login = () => {
                 <section className="register">
                     <Title name="Sign up"/>
                     <div className="info">
-                            <input ref={inputFirstName} name="first_name" type="text" placeholder="First name*" autoComplete="given-name"/>
+                            <input ref={inputFirstName} name="first_name" type="text" placeholder="First name*" autoComplete="given-name" autoFocus/>
                             <input ref={inputLastName} name="last_name" type="text" placeholder="Last name*" autoComplete="family-name"/>
                             <input ref={inputMail} name="mail" type="email" placeholder="Mail*" autoComplete="email"/>
                             <input ref={inputPassword} name="password" type="password" placeholder="Password*"/>
