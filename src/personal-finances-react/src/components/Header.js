@@ -8,7 +8,7 @@ const Header = (props) => {
     const imgProfile = require.context('../assets/img/users', true);
 
 
-    function singOutFunction() {
+    function signOutFunction() {
         cookies.remove('id');
         cookies.remove('mail');
         return window.location.href = '/';
@@ -24,13 +24,12 @@ const Header = (props) => {
             { cookies.get("mail") &&
                 <button className="log-in">
                     <img src={props.image ? imgProfile(`./${props.image}`).default : DefaultImg} alt="log in"/>
-                    <p onClick={singOutFunction}>Sing out</p>
+                    <p onClick={signOutFunction}>sign out</p>
                 </button>
             }
             { !cookies.get("mail") &&
                 <button className="log-in">
                     <img src={DefaultImg} alt="log in"/>
-                    <p>Sing In</p>
                 </button>
             }
         </div>

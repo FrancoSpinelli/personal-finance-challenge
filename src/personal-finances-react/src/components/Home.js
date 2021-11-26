@@ -59,9 +59,12 @@ const Home = () => {
     return (
         <React.Fragment>
             {!cookies.get('mail') && 
-                <section className="session">
-                    <Login/>
-                </section>
+                <div className="session-div">
+                    <Header image={user.data ? user.data.image : ""}/>
+                    <section className="session">
+                        <Login/>
+                    </section>
+                </div>
             }
             {cookies.get('mail') && 
                 <section className="home">

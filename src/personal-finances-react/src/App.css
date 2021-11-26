@@ -6,7 +6,7 @@
 }
 
 .home{
-  background-color: #f2f2f2;
+  background-color: #e5fafcc7;
   min-height: 100vh;
 }
 
@@ -38,8 +38,7 @@ button:hover{
   justify-content: space-around;
   align-items: center;
   position: relative;
-  background-color: #ffecec;
-
+  background-color: #fff4fb;
 }
 
 .movement div{
@@ -108,7 +107,7 @@ button:hover{
 }
 
 .view-more{
-  background-color: #ffecec;
+  background-color: #fff4fb;
   display: flex;
   align-items: center;
   justify-content: center ;
@@ -180,7 +179,7 @@ button:hover{
   font-size: 1rem;
   border: 1px solid #000000;
   border-radius: 0.8rem;
-  background-color: #ffecec;  
+  background-color: #fff4fb;  
 }
 
 .balance .info{
@@ -290,7 +289,7 @@ button:hover{
 .new-movement{
   width: 100%;
   margin: 2rem auto 0;
-  background-color: #ffecec;
+  background-color: #fff4fb;
   position: relative;
 }
 
@@ -396,11 +395,15 @@ button:hover{
 
 /* LOGIN */
 
+.session-div{
+  min-height: 100vh;
+  background-color: #e5fafcc7;
+}
+
 .session{
-  height: 100vh;
-  background-color: #f2f2f2;
   display: flex;
   align-items: center;
+  min-height: 85vh
 }
 
 .login{
@@ -413,7 +416,7 @@ button:hover{
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  background-color: #ffecec;
+  background-color: #fff4fb;
 }
 
 .login .info input{
@@ -491,7 +494,7 @@ button:hover{
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  background-color: #ffecec;
+  background-color: #fff4fb;
 
 }
 
