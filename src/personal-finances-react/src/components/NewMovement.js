@@ -2,6 +2,8 @@ import React, {useState, useRef, useEffect} from 'react';
 import Title from '../components/Title';
 import ButtonType from '../components/Buttons/Type';
 import Cookies from 'universal-cookie';
+import Swal from 'sweetalert2';
+
 
 const NewMovement = (props) => {
     
@@ -90,9 +92,26 @@ const NewMovement = (props) => {
     }
 
     function deleteFunction() {
-        let bodyJSON = bodyToJSON()
-        ajax(`http://192.168.55.107:3003/api/movements/delete/${props.propsData.id}`, 'post', "", bodyJSON );
-        return props.exit()
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                'Deleted!',
+                'Your movement has been deleted.',
+                'success'
+                )
+                let bodyJSON = bodyToJSON()
+                ajax(`http://192.168.55.107:3003/api/movements/delete/${props.propsData.id}`, 'post', "", bodyJSON );
+                return props.exit()
+            }
+        })
     }
 
     let dateNow = new Date(Date.now());
