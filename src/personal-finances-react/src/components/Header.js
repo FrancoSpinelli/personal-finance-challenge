@@ -1,5 +1,5 @@
 import React from 'react';
-import imgLogo from '../assets/img/icons/logo-2.png';
+import imgLogo from '../assets/img/icons/logo.png';
 import DefaultImg from '../assets/img/users/default.jpg';
 import Cookie from 'universal-cookie';
 

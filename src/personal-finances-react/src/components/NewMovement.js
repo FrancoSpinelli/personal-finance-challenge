@@ -20,7 +20,7 @@ const NewMovement = (props) => {
 
     const [categories, setCategories] = useState([]);
     useEffect(() => {
-        ajaxGet('http://192.168.4.152:3003/api/categories', (response) => setCategories(response));
+        ajaxGet('/api/categories', (response) => setCategories(response));
     }, []);
     
 
@@ -58,7 +58,7 @@ const NewMovement = (props) => {
         let errors = validationsFunction();
         if (errors === false){
             let bodyJSON = bodyToJSON();
-            ajaxPost('http://192.168.4.152:3003/api/movements/add', bodyJSON, true, () => props.exit());
+            ajaxPost('/api/movements/add', bodyJSON, true, () => props.exit());
         }
         
     }
@@ -67,7 +67,7 @@ const NewMovement = (props) => {
         let errors = validationsFunction();
         if (errors === false){
             let bodyJSON = bodyToJSON();
-            ajaxPost(`http://192.168.4.152:3003/api/movements/edit/${props.propsData.id}`, bodyJSON, true, () => props.exit());
+            ajaxPost(`/api/movements/edit/${props.propsData.id}`, bodyJSON, true, () => props.exit());
         }
     }
 
@@ -88,7 +88,7 @@ const NewMovement = (props) => {
                     'success'
                 )
                 let bodyJSON = bodyToJSON()
-                ajaxPost(`http://192.168.4.152:3003/api/movements/delete/${props.propsData.id}`, bodyJSON, true, () => props.exit());
+                ajaxPost(`/api/movements/delete/${props.propsData.id}`, bodyJSON, true, () => props.exit());
             }
         })
     }

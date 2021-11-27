@@ -26,7 +26,7 @@ const Login = () => {
                 password: inputPassword.current.value,
             } 
             let bodyJSON = JSON.stringify(body);
-            ajaxPost(`http://192.168.4.152:3003/api/users/login`, bodyJSON, true,
+            ajaxPost(`/api/users/login`, bodyJSON, true,
             (response) => {
                 cookies.set('id', response.data.id, {path: "/",});
                 cookies.set('mail', response.data.mail, {path: "/"});
@@ -53,7 +53,7 @@ const Login = () => {
             } 
             let bodyJSON = JSON.stringify(body);
             
-            ajaxPost(`http://192.168.4.152:3003/api/users/register`, bodyJSON, true,
+            ajaxPost(`/api/users/register`, bodyJSON, true,
             (response) => {
                 cookies.set('id', response.data.id, {path: "/",});
                 cookies.set('mail', response.data.mail, {path: "/"});

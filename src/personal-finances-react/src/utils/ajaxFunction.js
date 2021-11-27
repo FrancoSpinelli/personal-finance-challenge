@@ -1,5 +1,8 @@
+let host = 'http://localhost:3003';
+
 module.exports = {
-    ajaxPost: function (url, body, json = true, callback200, callback204) {
+    ajaxPost: function (path, body, json = true, callback200, callback204) {
+        let url = host + path;
         const http = new XMLHttpRequest();
         http.open("post", url, true);
         if (json === true){
@@ -19,7 +22,8 @@ module.exports = {
             }
         
     },
-    ajaxGet: function (url, callback200) {
+    ajaxGet: function (path, callback200) {
+        let url = host + path;
         const http = new XMLHttpRequest();
         http.open('get', url, true);
         http.onreadystatechange = function () {

@@ -19,9 +19,9 @@ const Home = () => {
 
     const [change, setChange] = useState(false);
     useEffect(() => {
-        ajaxGet(`http://192.168.4.152:3003/api/users/${userID}`, (response) => setUser(response));
-        ajaxGet(`http://192.168.4.152:3003/api/movements/${userID}`, (response) => setMovements(response));
-        ajaxGet(`http://192.168.4.152:3003/api/movements/balance/${userID}`, (response) => setBalance(response));
+        ajaxGet(`/api/users/${userID}`, (response) => setUser(response));
+        ajaxGet(`/api/movements/${userID}`, (response) => setMovements(response));
+        ajaxGet(`/api/movements/balance/${userID}`, (response) => setBalance(response));
         setChange(false)
     }, [change]);
 

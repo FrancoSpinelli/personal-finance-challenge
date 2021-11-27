@@ -9,7 +9,7 @@ const Lastmovements = (props) => {
 
     const [movements, setMovements] = useState([]);
     useEffect(() => {
-        ajaxGet(`http://192.168.4.152:3003/api/movements/${cookies.get('id')}`, (response) => setMovements(response));
+        ajaxGet(`/api/movements/${cookies.get('id')}`, (response) => setMovements(response));
     }, [props.movements]);
 
 

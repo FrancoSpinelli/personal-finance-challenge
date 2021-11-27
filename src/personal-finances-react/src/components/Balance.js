@@ -11,13 +11,13 @@ const Balance = (props) => {
 
     const [balance, setBalance] = useState("");
     useEffect(() => {
-        ajaxGet(`http://192.168.4.152:3003/api/movements/balance/${cookies.get('id')}`, (response) => setBalance(response));
+        ajaxGet(`/api/movements/balance/${cookies.get('id')}`, (response) => setBalance(response));
     }, [props.balance]);
     
     
     function imageFunction() {
         let formData = new FormData(document.querySelector("#form"))        
-        ajaxPost(`http://192.168.4.152:3003/api/users/edit/${cookies.get('id')}`, formData, false,
+        ajaxPost(`/api/users/edit/${cookies.get('id')}`, formData, false,
         () => document.querySelector(".error-balance").innerText = "",
         () => {
             document.querySelector(".error-balance").innerText = 'valid formats are ".jpg" and ".jpeg"'
@@ -27,7 +27,7 @@ const Balance = (props) => {
     const [user, setUser] = useState("");
     useEffect(() => {
         setTimeout(() => {
-            ajaxGet(`http://192.168.4.152:3003/api/users/${cookies.get('id')}`, (response) => setUser(response));
+            ajaxGet(`/api/users/${cookies.get('id')}`, (response) => setUser(response));
             return setChange(false);
         }, 1000);
     }, [change]);
