@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multerMiddleware = require ('../Middlewares/multerMiddleware');
-
-let apiController = require ('../controllers/apiController');
+const apiController = require ('../controllers/apiController');
 
 
 //USERS
@@ -25,5 +24,6 @@ router.post('/movements/delete/:id', apiController.delete);
 
 //CATEGORIES 
 router.get('/categories', apiController.categories);
+
 
 module.exports = router;

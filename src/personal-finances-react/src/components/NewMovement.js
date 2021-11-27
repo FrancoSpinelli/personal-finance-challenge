@@ -3,11 +3,14 @@ import Title from '../components/Title';
 import ButtonType from '../components/Buttons/Type';
 import Cookies from 'universal-cookie';
 import Swal from 'sweetalert2';
+import { ajaxGet, ajaxPost } from '../utils/ajaxFunction';
 
 
 const NewMovement = (props) => {
-    
     const cookies = new Cookies();
+
+    let dateNow = new Date(Date.now());
+    dateNow = `${dateNow.getUTCFullYear()}-${dateNow.getUTCMonth()+1}-${dateNow.getUTCDate()}`
 
     let dateInput = useRef();
     let amountInput = useRef();
@@ -15,30 +18,9 @@ const NewMovement = (props) => {
     let categoryInput = useRef();
 
 
-    function ajax(url, method, setState, bodyJSON) {
-        const http = new XMLHttpRequest();
-        http.open(method, url, true);
-        if(method === "post"){
-            http.setRequestHeader('Content-Type', 'application/json')
-            http.send(bodyJSON);
-        }
-        if(method === "get"){
-            http.onreadystatechange = function () {
-                if(this.status === 200 && this.readyState === 4){
-                    let response = JSON.parse(this.responseText);
-                        return setState(response);
-                }
-            }
-            http.send();
-        }
-        
-    }
-
     const [categories, setCategories] = useState([]);
-
-
     useEffect(() => {
-        ajax('http://192.168.55.107:3003/api/categories', 'get', setCategories, "");
+        ajaxGet('http://192.168.4.152:3003/api/categories', (response) => setCategories(response));
     }, []);
     
 
@@ -76,8 +58,7 @@ const NewMovement = (props) => {
         let errors = validationsFunction();
         if (errors === false){
             let bodyJSON = bodyToJSON();
-            ajax('http://192.168.55.107:3003/api/movements/add', 'post', "", bodyJSON );
-            return props.exit();
+            ajaxPost('http://192.168.4.152:3003/api/movements/add', bodyJSON, true, () => props.exit());
         }
         
     }
@@ -86,15 +67,14 @@ const NewMovement = (props) => {
         let errors = validationsFunction();
         if (errors === false){
             let bodyJSON = bodyToJSON();
-            ajax(`http://192.168.55.107:3003/api/movements/edit/${props.propsData.id}`, 'post', "", bodyJSON );
-            return props.exit() 
+            ajaxPost(`http://192.168.4.152:3003/api/movements/edit/${props.propsData.id}`, bodyJSON, true, () => props.exit());
         }
     }
 
     function deleteFunction() {
         Swal.fire({
             title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            text: "You won't be able to revert it!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -103,19 +83,17 @@ const NewMovement = (props) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire(
-                'Deleted!',
-                'Your movement has been deleted.',
-                'success'
+                    'Deleted!',
+                    'Your item has been deleted.',
+                    'success'
                 )
                 let bodyJSON = bodyToJSON()
-                ajax(`http://192.168.55.107:3003/api/movements/delete/${props.propsData.id}`, 'post', "", bodyJSON );
-                return props.exit()
+                ajaxPost(`http://192.168.4.152:3003/api/movements/delete/${props.propsData.id}`, bodyJSON, true, () => props.exit());
             }
         })
     }
 
-    let dateNow = new Date(Date.now());
-    dateNow = `${dateNow.getUTCFullYear()}-${dateNow.getUTCMonth()+1}-${dateNow.getUTCDate()}`
+
 
     return (
         <div className="new-movement">
@@ -144,15 +122,15 @@ const NewMovement = (props) => {
                     </select>
                 </div>
                 <div className="errors">
-                    <p className="error">
-
-                    </p>
+                    <p className="error"></p>
                 </div>
+                {/* NEW MOVEMENTE */}
                 { !props.propsData && 
                     <div id="save">
                         <span onClick={saveFunction}><ButtonType type={props.movement} name="Save"/></span>
                     </div>
                 }
+                {/* EDIT OR DELET MOVEMENTE */}
                 { props.propsData && 
                     <div>
                         <span onClick={editFunction}><ButtonType type="edit" name="Save"/></span>

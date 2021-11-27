@@ -2,18 +2,13 @@ const express = require ('express');
 const app = express();
 const path = require ('path');
 const methodOverride = require ('method-override');
-const cors = require('cors')
+const cors = require('cors');
+
 
 app.use(cors());
 
 
-// Configuración de EJS
-
-app.set ('view engine', 'ejs');
-app.set('views', path.join(__dirname, './src/views'));
-
-
-// Configuración de METODOS 
+// METHODS CONFIG
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride('_method'));
@@ -26,18 +21,14 @@ app.listen(process.env.PORT || 3003, function(){
 
 
 
-// Configuración ruta absoluta a la carpeta PUBLIC
-
+// PUBLIC ROUTE
 const publicPath = path.resolve(__dirname, './public');
 app.use(express.static(publicPath));
 
 
 
-// Rutas hacia los módulos 
+//API ROUTE
 
 let apiRoute = require ('./src/routes/api.js');
-
-// Respuestas con los prefijos '/...'
-
 app.use('/api/', apiRoute);
 

@@ -9,8 +9,7 @@ let storage = multer.diskStorage({
     filename: (req, file, callback) =>{
         let imageName = Date.now() + "-" + "ProfileImage" + path.extname(file.originalname);
         callback(null, imageName);
-    }
-    
+    } 
 });
 
 let fileUpload = multer({storage});

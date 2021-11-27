@@ -4,7 +4,7 @@ let fs = require('fs');
 
 let mainController = {
     //USERS
-    users: async(req,res) => {
+    users: async(req, res) => {
         try{
             let users = await db.Users.findAll();
             return res.status(200).json({
@@ -48,7 +48,7 @@ let mainController = {
             let userInDB;
             if (body.mail){
                 userInDB = await db.Users.findOne({
-                    where: {mail: body.mail}
+                    where: {mail: body.mail},
                 })
             }
             if (userInDB === null){
@@ -82,14 +82,14 @@ let mainController = {
                 data: user,
             });
         }catch (err){
-            console.error(err)
+            console.error(err);
         }
     },
     userEdit: async (req, res) => {
         try{
             let user = await db.Users.findByPk(req.params.id);
             if ( path.extname(req.file.filename) === ".jpeg" || path.extname(req.file.filename) === ".jpg"){
-                await db.Users.update({image: req.file.filename}, {where: {id: req.params.id}})
+                await db.Users.update({image: req.file.filename}, {where: {id: req.params.id}});
                 return res.status(200).json({
                     status: 200,
                     msj: "successful action",
@@ -105,7 +105,7 @@ let mainController = {
                 });
             }
         }catch (err){
-            console.error(err)
+            console.error(err);
         }
     },
     //MOVEMENTS
@@ -113,7 +113,7 @@ let mainController = {
         let categories = await db.Categories.findAll();
         let movements = await db.Movements.findAll({
             where: {user_id: req.params.id },
-            order: [['date', 'desc'], ['id', 'desc']]
+            order: [['date', 'desc'], ['id', 'desc']],
         });
 
         return res.status(200).json({
@@ -132,14 +132,14 @@ let mainController = {
     balanceByUser: async(req, res) => {
         try{
             let movements = await db.Movements.findAll({
-                where: {user_id: req.params.id}
+                where: {user_id: req.params.id},
             });
             if (movements.length > 0){
                 let positiveBalance = movements.map(movement => {
                     if(movement.type === 'receipt'){
-                        return Number(movement.amount)
+                        return Number(movement.amount);
                     } else {
-                        return 0
+                        return 0;
                     }
                 }) 
                 positiveBalance = positiveBalance.reduce((acum, acumAct) => {
@@ -147,9 +147,9 @@ let mainController = {
                 })
                 let negativeBalance = movements.map(movement => {
                     if(movement.type === 'expense'){
-                        return Number(movement.amount)
+                        return Number(movement.amount);
                     } else {
-                        return 0
+                        return 0;
                     }
                 }) 
                 negativeBalance = negativeBalance.reduce((acum, acumAct) => {
@@ -160,7 +160,7 @@ let mainController = {
                     data: {
                         positive_balance: positiveBalance,
                         negative_balance: negativeBalance,
-                        balance: (positiveBalance - negativeBalance).toFixed(2)
+                        balance: (positiveBalance - negativeBalance).toFixed(2),
                     }
                 })
             }

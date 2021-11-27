@@ -9,24 +9,20 @@ const Movement = (props) => {
     let date = new Date(props.date);
     date = `${date.getDate() + 1}/${date.getMonth() + 1}`;
 
-    function optionsFunction(e) {
-        if (options === false){
-            setOptions(true)
-        } else {
-            setOptions(false)
-        }
-    }
-
     const [options, setOptions] = useState(false);
+    function optionsFunction() {
+        options === false ? setOptions(true) : setOptions(false);
+    }
 
     function exitFunction() {
-        props.exit()
-        setOptions(false)
+        props.exit();
+        setOptions(false);
     }
+
+
 
     return (
         <React.Fragment>
-            
             <section className="movement">
                 <div>
                     <p id="date">{date}</p>
@@ -47,8 +43,6 @@ const Movement = (props) => {
             {   options === true &&
                 <NewMovement exit={exitFunction} propsData={props} key={props.id} type="Edit" movement={props.type}/> 
             }
-
-
         </React.Fragment>
         
     );

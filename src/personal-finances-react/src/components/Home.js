@@ -6,58 +6,43 @@ import Lastmovements from './LastMovements';
 import Login from './Login';
 import NewMovement from './NewMovement';
 import Cookie from 'universal-cookie';
+import { ajaxGet } from '../utils/ajaxFunction';
 
 const Home = () => {
 
     const cookies = new Cookie();
     const userID = cookies.get('id');
 
-    function ajax(url, method, setState, bodyJSON) {
-        const http = new XMLHttpRequest();
-        http.open(method, url);
-        if(method === "post"){
-            http.setRequestHeader('Content-Type', 'application/json')
-            http.send(bodyJSON);
-        }
-        if(method === "get"){
-            http.onreadystatechange = function () {
-                if(this.status === 200 && this.readyState === 4){
-                    let response = JSON.parse(this.responseText);
-                        return setState(response);
-                }
-            }
-            http.send();
-        }
-    }
-
     const [user, setUser] = useState([]);
     const [movements, setMovements] = useState([]);
-    const [balance, setBalance] = useState("");
+    const [balance, setBalance] = useState(0);
 
     const [change, setChange] = useState(false);
     useEffect(() => {
-        ajax(`http://192.168.55.107:3003/api/users/${userID}`, 'get', setUser);
-        ajax(`http://192.168.55.107:3003/api/movements/${userID}`, 'get', setMovements);
-        ajax(`http://192.168.55.107:3003/api/movements/balance/${userID}`, 'get', setBalance);
+        ajaxGet(`http://192.168.4.152:3003/api/users/${userID}`, (response) => setUser(response));
+        ajaxGet(`http://192.168.4.152:3003/api/movements/${userID}`, (response) => setMovements(response));
+        ajaxGet(`http://192.168.4.152:3003/api/movements/balance/${userID}`, (response) => setBalance(response));
         setChange(false)
     }, [change]);
 
+    // CLICK BUTTONS
     const [type, setType] = useState("");
     function onClickReceiptsFunction(e) {
-        return setType("receipt")
+        return setType("receipt");
     }
     function onClickExpensesFunction(e) {
-        return setType("expense")
+        return setType("expense");
     }
     
 
     function exitFunction() {        
         setType("");
-        setChange(true)
+        setChange(true);
     }
     
     return (
         <React.Fragment>
+            {/* USER IS NOT LOGGED */}
             {!cookies.get('mail') && 
                 <div className="session-div">
                     <Header image={user.data ? user.data.image : ""}/>
@@ -66,6 +51,8 @@ const Home = () => {
                     </section>
                 </div>
             }
+
+            {/* USER IS LOGGED */}
             {cookies.get('mail') && 
                 <section className="home">
                 <Header image={user.data ? user.data.image : ""}/>
@@ -75,7 +62,6 @@ const Home = () => {
                 { !balance.data &&  
                     <Balance exit={exitFunction} balance={0} />
                 }
-                
                 <div className="buttons-type">
                     <span onClick={onClickReceiptsFunction}><ButtonType type="receipt" name="Receipt"/></span>
                     <span onClick={onClickExpensesFunction}><ButtonType type="expense" name="Expense"/></span>

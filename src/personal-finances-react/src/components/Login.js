@@ -2,8 +2,10 @@ import React, {useRef, useState} from 'react';
 import ButtonType from '../components/Buttons/Type';
 import Title from './Title';
 import Cookie from 'universal-cookie';
+import {ajaxPost} from '../utils/ajaxFunction';
 
 const Login = () => {
+    const cookies = new Cookie();
 
     let inputFirstName = useRef();
     let inputLastName = useRef();
@@ -11,37 +13,10 @@ const Login = () => {
     let inputPassword = useRef();
     let textError = useRef();
 
-    const cookies = new Cookie();
-
-    function ajax(url, method, setState, bodyJSON, callback) {
-        const http = new XMLHttpRequest();
-        http.open(method, url);
-        if(method === "post"){
-            http.setRequestHeader('Content-Type', 'application/json');
-            http.send(bodyJSON);
-            http.onreadystatechange = function () {
-                if(this.status === 200 && this.readyState === 4){
-                    let response = JSON.parse(this.responseText);
-                    if (response.data !== null) {
-                        cookies.set('id', response.data.id, {path: "/",});
-                        cookies.set('mail', response.data.mail, {path: "/"});
-                        window.location.href = '/';
-                    }
-                    if(response.status === 204){
-                        callback()
-                    }
-                }
-            }
-        }
-        if(method === "get"){
-            http.onreadystatechange = function () {
-                if(this.status === 200 && this.readyState === 4){
-                    let response = JSON.parse(this.responseText);
-                        return setState(response);
-                }
-            }
-            http.send();
-        }
+    // LOG IN OR REGISTER
+    const [register, setRegister] = useState(false);
+    function formChangeFunction() {
+        register === false ? setRegister(true) : setRegister(false);
     }
 
     function loginFunction() {
@@ -51,12 +26,17 @@ const Login = () => {
                 password: inputPassword.current.value,
             } 
             let bodyJSON = JSON.stringify(body);
-            ajax(`http://192.168.55.107:3003/api/users/login`, 'post', "", bodyJSON, () => {
+            ajaxPost(`http://192.168.4.152:3003/api/users/login`, bodyJSON, true,
+            (response) => {
+                cookies.set('id', response.data.id, {path: "/",});
+                cookies.set('mail', response.data.mail, {path: "/"});
+                window.location.href = '/';
+            },
+            () => {
                 textError.current.innerText = "Incorrect mail or password.";
-                inputMail.current.value = inputMail.current.value;
                 inputPassword.current.value = null;
                 inputPassword.current.focus();
-            } );
+            })
         } else {
             textError.current.innerText = "Mail and password cannot be empty.";
             inputMail.current.value === "" ? inputMail.current.focus() : inputPassword.current.focus();
@@ -73,26 +53,27 @@ const Login = () => {
             } 
             let bodyJSON = JSON.stringify(body);
             
-            
-            ajax(`http://192.168.55.107:3003/api/users/register`, 'post', "", bodyJSON, () => {
+            ajaxPost(`http://192.168.4.152:3003/api/users/register`, bodyJSON, true,
+            (response) => {
+                cookies.set('id', response.data.id, {path: "/",});
+                cookies.set('mail', response.data.mail, {path: "/"});
+                window.location.href = '/';
+            },
+            () => {
                 inputMail.current.focus();
                 inputPassword.current.value = "" ;
                 textError.current.innerText = "The email is already in use.";
-            });
+            })
         } else {
             textError.current.innerText = "First name, last name, mail and password cannot be empty.";
         }
     }
     
-    const [register, setRegister] = useState(false);
 
-    function formChangeFunction() {
-        register === false ? setRegister(true) : setRegister(false);
-    }
 
     return (
         <React.Fragment>
-
+            {/* CLICK SIGN IN */}
             { register === false && 
                 <section className="login">
                     <Title name="Sign in"/>
@@ -109,6 +90,7 @@ const Login = () => {
                 </section>
             }
 
+            {/* CLICK SIGN UP */}
             { register === true &&
                 <section className="register">
                     <Title name="Sign up"/>
@@ -120,14 +102,11 @@ const Login = () => {
                             <div className="errors">
                                 <p ref={textError} className="error"></p>
                             </div>
-
                             <span className="button-span" onClick={registerFunction} ><ButtonType type="receipt" name="Sign up"/></span>
-
                         <p id="register"><span onClick={formChangeFunction} className="link">Already have an account?</span></p>
                     </div>
                 </section>
             }
-
         </React.Fragment>
     );
 }
