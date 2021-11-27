@@ -1,5 +1,5 @@
 import React from 'react';
-import DefaultImgLogo from '../assets/img/users/default-logo.jpg';
+import imgLogo from '../assets/img/icons/logo-2.png';
 import DefaultImg from '../assets/img/users/default.jpg';
 import Cookie from 'universal-cookie';
 
@@ -16,7 +16,7 @@ const Header = (props) => {
 
     return (
         <div className="header">
-            <img className="logo" src={DefaultImgLogo} alt="logo"/>
+            <img className="logo" src={imgLogo} alt="logo"/>
             <h1>Personal Finance</h1>
             { cookies.get("mail") &&
                 <button className="log-in">
