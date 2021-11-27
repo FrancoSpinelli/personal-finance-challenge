@@ -1,4 +1,3 @@
-insert into users (first_name, last_name, mail, password) values ('Franco', 'Spinelli', 'franco_spinelli@hotmail.com', '1234');
 insert into users (first_name, last_name, mail, password) values ('Joly', 'Brockhouse', 'jbrockhouse1@meetup.com', 'vLajSLiUd');
 insert into users (first_name, last_name, mail, password) values ('Jada', 'Crutchfield', 'jcrutchfield2@webnode.com', 'gNoY7lF');
 insert into users (first_name, last_name, mail, password) values ('Mervin', 'Lammertz', 'mlammertz3@tmall.com', 'bX17rlfso');
